@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployer projectName="" projectRoot="" defaultProfile="testProfile">
+    <!-- 
+    The attributes are optional:
+        * projectName
+        * projectRoot
+        * defaultProfile
+    
+    Default values:
+        * projectName: the name of the Laravel Root folder
+        * projectRoot: the path to the Laravel Root folder
+    
+   -->
+
+    <profile name="testProfile">
+        <appFolder>{projectName}_test_app_{timestamp}</appFolder>
+        <storageFolder>{projectName}_test_storage_{timestamp}</storageFolder>
+        <zipper use="defaultZipper"/>
+        <domain use="testDomain" />
+        <symbolicLinks use="defaultSymbolicLinks" />
+        <database use="database1"/>
+    </profile>
+    
+    <profile name="prodProfile">
+        <appFolder>{projectName}_test_app_{timestamp}</appFolder>
+        <storageFolder>{projectName}_test_storage_{timestamp}</storageFolder>
+        <zipper use="defaultZipper"/>
+        <domain use="testDomain" />
+        <symbolicLinks use="defaultSymbolicLinks" />
+        <database use="database1"/>
+    </profile>
+
+    <zipper name="defaultZipper">
+        <exclude>.git</exclude>
+        <exclude>.idea</exclude>
+        <exclude>.vs</exclude>
+        <exclude>database\</exclude>
+        <exclude>deployment\</exclude>
+        <exclude>node_modules\</exclude>
+        <exclude>storage\</exclude>
+        <exclude>tests\</exclude>
+        <exclude>tutorial\</exclude>
+        <exclude>public\storage\</exclude>
+        <exclude>*</exclude>
+        <include destination=".env">deployment\{profileName}\.env</include>
+    </zipper>
+
+    <defaultSymbolicLinks name="defaultSymbolicLinks">
+        <symbolicLink>
+            <from>{domainEntry}</from>
+            <to>{appFolder}/public</to>
+        </symbolicLink>
+        <symbolicLink>
+            <from>{appFolder}/public/storage</from>
+            <to>{storageFolder}</to>
+        </symbolicLink>
+    </defaultSymbolicLinks>
+
+
+    <webServer name="dummyServers.xml" external=""/>
+
+    <webServer name="dummyWebServer1">
+        <sshConnection>
+            <host>dummyWebServer1Host.dk</host>
+            <port>22</port>
+            <username>username1</username>
+            <password>password1</password>
+            <privateKeyFile>C:\dummy</privateKeyFile>
+        </sshConnection>
+
+        <domain name="testDomain">
+            <entry>dummyTestDomainEntry</entry>
+            <uploadFolder>uploads</uploadFolder>
+            <url>test.dummyWebServer1Host.dk</url>
+            <url>www.test.dummyWebServer1Host.dk</url>
+        </domain>
+
+        <domain name="productionDomain">
+            <entry>dummpProductionDomainEntry</entry>
+            <uploadFolder>uploads</uploadFolder>
+            <url>dummyWebServer1Host.dk</url>
+            <url>dummyWebServer1Host.dk</url>
+        </domain>
+    </webServer>
+
+    <dbServer name="abc">
+        <database name="database1"/>
+    </dbServer>
+
+</deployer>
