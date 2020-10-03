@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <servers>
     <webServer name="dummyWebServer1">
         <sshConnection>
@@ -17,7 +17,7 @@
         </domain>
         
         <domain name="productionDomain">
-            <entry>dummpProductionDomainEntry</entry>
+            <entry>dummyProductionDomainEntry</entry>
             <uploadFolder>uploads</uploadFolder>
             <url>dummyWebServer1Host.dk</url>
             <url>dummyWebServer1Host.dk</url>
