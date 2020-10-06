@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ArgumentHandler")]
+[assembly: AssemblyTitle("MyXMLtest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ArgumentHandler")]
+[assembly: AssemblyProduct("MyXMLtest")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("DEFC9C62-6257-4F8D-A5EB-7A6188962C38")]
+[assembly: Guid("23813B54-0FF3-4411-8BB8-6456BC65AEF9")]
 
 // Version information for an assembly consists of the following four values:
 //

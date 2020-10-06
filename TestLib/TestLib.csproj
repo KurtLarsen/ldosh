@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{89A7280F-BD46-4D50-B3C9-0D22ADFE2BC8}</ProjectGuid>
+        <ProjectGuid>{8175EA52-4256-4E5D-9FEE-D43D81355CD6}</ProjectGuid>
         <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>consoleAppTest</RootNamespace>
-        <AssemblyName>consoleAppTest</AssemblyName>
+        <RootNamespace>TestLib</RootNamespace>
+        <AssemblyName>TestLib</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -35,54 +35,16 @@
     <ItemGroup>
         <Reference Include="System" />
         <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
         <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
             <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
         </Reference>
-        <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="DeployerStaticTest.cs" />
-        <Compile Include="DeployerTest.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\ArgumentHandlerLib\ArgumentHandlerLib.csproj">
-        <Project>{defc9c62-6257-4f8d-a5eb-7a6188962c38}</Project>
-        <Name>ArgumentHandlerLib</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\consoleApp\consoleApp.csproj">
-        <Project>{223ee7ca-76f6-4655-8347-f44cfdcfe9c2}</Project>
-        <Name>consoleApp</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\TestToolsLib\TestToolsLib.csproj">
-        <Project>{14c1d874-fe74-4f19-9ce4-bdcacec800d1}</Project>
-        <Name>TestToolsLib</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\XmlHelperLib\XmlHelperLib.csproj">
-        <Project>{b9099cf2-fada-4a46-838b-26c0e2f2edba}</Project>
-        <Name>XmlHelperLib</Name>
-      </ProjectReference>
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="TestData\dummyServers.xml" />
-      <Content Include="TestData\my_servers_do_not_git.xml" />
-      <Content Include="TestData\testProject\app\dummy.php" />
-      <Content Include="TestData\testProject\deployment\dummyProfiles.xml" />
-      <Content Include="TestData\testProject\deployment\my_profiles_do_not_git.xml" />
-      <Content Include="TestData\testProject\deployment\testProfile\.env" />
-      <Content Include="TestData\testProject\public\index.php" />
-      <Content Include="TestData\xmlFileWithError.xml" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="TestData\testProject\bootstrap" />
-      <Folder Include="TestData\testProject\config" />
-      <Folder Include="TestData\testProject\database" />
-      <Folder Include="TestData\testProject\node_modules" />
-      <Folder Include="TestData\testProject\public\storage" />
-      <Folder Include="TestData\testProject\resources" />
-      <Folder Include="TestData\testProject\routes" />
-      <Folder Include="TestData\testProject\storage" />
-      <Folder Include="TestData\testProject\vendor" />
+        <Compile Include="TestBase.cs" />
+        <Compile Include="TestTools.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

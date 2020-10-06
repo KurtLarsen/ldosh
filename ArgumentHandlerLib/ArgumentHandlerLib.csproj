@@ -4,12 +4,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{6AD46311-3A71-4B68-851D-7EDA14181628}</ProjectGuid>
-        <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+        <ProjectGuid>{DEFC9C62-6257-4F8D-A5EB-7A6188962C38}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ArgumentHandlerTest</RootNamespace>
-        <AssemblyName>ArgumentHandlerTest</AssemblyName>
+        <RootNamespace>ArgumentHandlerLib</RootNamespace>
+        <AssemblyName>ArgumentHandlerLib</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -37,24 +36,17 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
-        <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
-            <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
-        </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="ArgumentGivenMoreThanOnceExceptionTest.cs" />
-        <Compile Include="ArgumentHandlerTest.cs" />
-        <Compile Include="ArgumentIdExpectedTest.cs" />
-        <Compile Include="MissingRequiredArgumentExceptionTest.cs" />
-        <Compile Include="MissingValuesExceptionTest.cs" />
+        <Compile Include="Argument.cs" />
+        <Compile Include="ArgumentHandler.cs" />
+        <Compile Include="exceptions\ArgumentException.cs" />
+        <Compile Include="exceptions\ArgumentGivenMoreThanOnceException.cs" />
+        <Compile Include="exceptions\ArgumentIdExpectedException.cs" />
+        <Compile Include="exceptions\MissingRequiredArgumentException.cs" />
+        <Compile Include="exceptions\MissingValuesException.cs" />
+        <Compile Include="exceptions\UnknownArgumentIdException.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="UnknownArgumentIdExceptionTest.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\ArgumentHandlerLib\ArgumentHandlerLib.csproj">
-        <Project>{defc9c62-6257-4f8d-a5eb-7a6188962c38}</Project>
-        <Name>ArgumentHandlerLib</Name>
-      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

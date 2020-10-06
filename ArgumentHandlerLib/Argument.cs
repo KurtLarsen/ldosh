@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace ArgumentHandler{
+namespace ArgumentHandlerLib{
 public class Argument{
     private readonly string _shortId;
     private bool _required = true;
     private string _longId;
     private readonly List<string> _values = new List<string>();
     private string _rawId;
-    private bool _stop; // default is false
+    private bool _ignoreOthers; // default is false
     private int _valueCountMin;
     private int _valueCountMax;
 
@@ -24,7 +24,7 @@ public class Argument{
 
     public bool IsRequired => _required;
 
-    public bool IsStop => _stop;
+    public bool IsIgnoreOthers => _ignoreOthers;
 
     public string RawId{
         get => _rawId;
@@ -46,14 +46,14 @@ public class Argument{
     }
 
 
-    public Argument ValueCount(int valueCount){
+    public Argument RequiredValueCount(int valueCount){
         _valueCountMin = valueCount;
         _valueCountMax = valueCount;
         return this;
     }
 
     // ReSharper disable once UnusedMember.Global
-    public Argument ValueCount(int min, int max){
+    public Argument RequiredValueCount(int min, int max){
         _valueCountMin = min;
         _valueCountMax = max;
         return this;
@@ -65,8 +65,8 @@ public class Argument{
     }
 
 
-    public Argument Stop(){
-        _stop = true;
+    public Argument IgnoreOthers(){
+        _ignoreOthers = true;
         return this;
     }
 
@@ -78,7 +78,7 @@ public class Argument{
         return _valueCountMax - _valueCountMin == 1 ? $"{_valueCountMin} or {_valueCountMax} values" : $"{_valueCountMin} to {_valueCountMax} values";
     }
 
-    public string ValuesAsString(){
+    public string GivenValuesAsString(){
         return string.Join(" ", _values);
     }
 }

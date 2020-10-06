@@ -3,44 +3,81 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using XmlHelperLib;
+using ArgumentHandlerLib;
 
 namespace consoleApp{
 public class Deployer{
+    private const string ProfileName = "p";
 
     private readonly string _projectName;
     private readonly string _projectRoot;
-    private readonly string _defaultProfile;
+    private readonly string _requestedProfileName;
 
     public string ProjectName => _projectName;
 
     public string ProjectRoot => _projectRoot;
 
-    public Deployer(ArgumentHandler.ArgumentHandler argumentHandler){
+    public Deployer(ArgumentHandler argumentHandler){
         var deployerXmlDoc = new XmlDocument();
         deployerXmlDoc.Load(argumentHandler.Arguments.Find(x=>x.GetShortId=="px" && x.RawId!=null).Values[0]);
 
 
         /*
-         * Set _projectRoot
+         * _projectRoot
          * 1. priority: command line argument -r
          * 2. priority: projectRoot-attribute in profileXml: <deployer projectRoot="xxx">
-         * 3. priority: auto-detect via PathToProfileXml 
+         * 3. priority: auto-detect via PathToProfileXml (works if profile.xml is placed somewhere inside project tree)
+         * else fail
          */
-        _projectRoot = argumentHandler.Arguments.Find(x=>x.GetShortId=="r" && x.RawId!=null)?.Values[0] ??
+        _projectRoot = argumentHandler.GetArgument("r")?.Values[0] ??
                        XmlHelper.GetOptionalAttr(XmlNames.ProjectRoot, deployerXmlDoc) ??
-                       LocateProjectRoot(argumentHandler.Arguments.Find(x=>x.GetShortId=="px" && x.RawId!=null).Values[0]);
+                       LocateProjectRoot(argumentHandler.GetArgument("px").Values[0]);
 
         /*
-         * Set _projectName
+         * _projectName
          * 1. priority: command line argument -n
-         * 2. priority: <deployer> attribute "projectName" in file profileXml
-         * 3. priority: auto-detect via _profileRoot
+         * 2. priority: attribute "projectName" in <deployer> in profile.Xml
+         * 3. priority: auto-detect via _profileRoot (use name of project folder as projectName)
+         * else fail
          */
-        _projectName = argumentHandler.Arguments.Find(x=>x.GetShortId=="pn" && x.RawId!=null)?.Values[0] ??
+        _projectName = argumentHandler.GetArgument("pn")?.Values[0] ??
                        XmlHelper.GetOptionalAttr(XmlNames.ProjectName, deployerXmlDoc) ??
                        ExtractProjectName(_projectRoot);
 
-        _defaultProfile = XmlHelper.GetOptionalAttr(XmlNames.DefaultProfile, deployerXmlDoc);
+
+        /*
+         * _selectedProfileName
+         * 1. priority: command line argument
+         * 2. priority: attribute "defaultProfile" in <deployer> in profile.xml
+         * 3. priority: if only one <profile> inside <deployer> than choose that
+         * else fail
+         */
+        var deployerNode = XmlHelper.GetUniqueNode(XmlNames.Deployer, deployerXmlDoc);
+        var profileList = XmlHelper.GetOneOrMoreNodes(XmlNames.Profile, deployerNode);
+        
+        _requestedProfileName = argumentHandler.GetArgument(ProfileName)?.Values[0] ??
+                           XmlHelper.GetOptionalAttr(XmlNames.DefaultProfile, deployerNode);
+        if (_requestedProfileName == null){
+        
+            if (profileList.Count == 1){
+                _requestedProfileName = XmlHelper.GetAttr(XmlNames.ProfileName, profileList[0]);
+            }
+            else{
+                throw new Exception("No profile selected");
+            }
+        }
+
+        XmlNode selectedProfileNode=null;
+        foreach (XmlNode profileNode in profileList){
+            if (XmlHelper.GetAttr(XmlNames.ProfileName, profileNode).Equals(_requestedProfileName)){
+                selectedProfileNode = profileNode;
+                break;
+            }
+        }
+
+        if (selectedProfileNode == null){
+            throw new RequestedProfileNodeNotFoundException(_requestedProfileName);
+        }
     }
 
     // ReSharper disable once MemberCanBePrivate.Global
