@@ -1,4 +1,5 @@
 ﻿using ArgumentHandlerLib;
+using ArgumentHandlerLib.exceptions;
 using NUnit.Framework;
 
 namespace ArgumentHandlerTest{
@@ -8,7 +9,7 @@ public class ArgumentIdExpectedTest{
     public void ArgumentIdExpected_works(){
         string arg1 = "abc";
         var expectedMsg = string.Format(ArgumentIdExpected.MsgMask, arg1);
-        var expectedCode = ArgumentIdExpected.Code;
+        var expectedCode = ArgumentIdExpected.ErrCode;
 
         var exception = Assert.Throws<ArgumentIdExpected>(delegate{
             throw new ArgumentIdExpected(arg1);
@@ -16,7 +17,7 @@ public class ArgumentIdExpectedTest{
 
         Assert.IsInstanceOf<ArgumentException>(exception);
         Assert.That(exception.Message, Is.EqualTo(expectedMsg));
-        Assert.That(exception.ErrCode() == expectedCode);
+        Assert.That(exception.Code == expectedCode);
     }
 }
 }

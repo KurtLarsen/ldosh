@@ -1,15 +1,15 @@
 ﻿using System;
+using ArgumentException = ArgumentHandlerLib.exceptions.ArgumentException;
 
 namespace ArgumentHandlerLib{
 public class MissingRequiredArgumentException:ArgumentException{
     public const string MsgMask = "Required argument not found: \"-{0}\"";
-    public const int Code = 3;
-    
-    public MissingRequiredArgumentException(Argument argument):base( MsgMask,argument.GetShortId){ }
+    public const int ErrCode = 3;
 
-
-    public override int ErrCode(){
-        return Code;
+    public MissingRequiredArgumentException(Argument argument) : base(MsgMask, argument.GetShortId){
+        _code = ErrCode;
     }
+
+
 }
 }

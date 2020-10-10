@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ArgumentHandlerLib;
+using ArgumentHandlerLib.exceptions;
 using NUnit.Framework;
 
 namespace ArgumentHandlerTest{
@@ -32,8 +33,8 @@ public class ArgumentHandlerTest{
 
         Assert.IsInstanceOf<MissingRequiredArgumentException>(x.ExceptionThrown);
 
-        Assert.That(((MissingRequiredArgumentException) x.ExceptionThrown).ErrCode(),
-            Is.EqualTo(MissingRequiredArgumentException.Code));
+        Assert.That(((MissingRequiredArgumentException) x.ExceptionThrown).Code,
+            Is.EqualTo(MissingRequiredArgumentException.ErrCode));
 
         Assert.That(x.ExceptionThrown.Message,
             Is.EqualTo(string.Format(MissingRequiredArgumentException.MsgMask, requiredArgument)));
@@ -63,7 +64,7 @@ public class ArgumentHandlerTest{
         
         Assert.IsInstanceOf<MissingValuesException>(x.ExceptionThrown);
         
-        Assert.That(((MissingValuesException) x.ExceptionThrown).ErrCode(), Is.EqualTo(MissingValuesException.Code));
+        Assert.That(((MissingValuesException) x.ExceptionThrown).Code, Is.EqualTo(MissingValuesException.ErrCode));
         
         var expectedMessage = string.Format(
             MissingValuesException.MsgMask, 
@@ -91,8 +92,8 @@ public class ArgumentHandlerTest{
         Assert.False(result);
         Assert.NotNull(x.ExceptionThrown);
         Assert.IsInstanceOf<UnknownArgumentIdException>(x.ExceptionThrown);
-        Assert.That(((UnknownArgumentIdException) x.ExceptionThrown).ErrCode(),
-            Is.EqualTo(UnknownArgumentIdException.Code));
+        Assert.That(((UnknownArgumentIdException) x.ExceptionThrown).Code,
+            Is.EqualTo(UnknownArgumentIdException.ErrCode));
         Assert.That(x.ExceptionThrown.Message, Is.EqualTo(string.Format(UnknownArgumentIdException.MsgMask, "-")));
     }
 

@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Linq;
 using System.Xml;
+using XmlHelperLib.exceptions;
 
 namespace XmlHelperLib{
 public static class XmlHelper{
     public static string GetAttr(string attrName, XmlNode node){
-        var s = node.Attributes?[attrName]?.Value ?? throw new XmlAttributeNotFound(attrName, node);
+        var s = node.Attributes?[attrName]?.Value ?? throw new XmlAttributeNotFoundException(attrName, node);
         return s;
     }
 
     public static XmlNodeList GetOneOrMoreNodes(string nodeName, XmlNode parent){
         var nodeList = parent.SelectNodes(nodeName);
         if (nodeList == null) throw new Exception($"Error selecting node <{nodeName}> from <{parent}>");
-        if (nodeList.Count == 0) throw new XmlNodeNotFound(nodeName, parent);
+        if (nodeList.Count == 0) throw new XmlNodeNotFoundException(nodeName, parent);
         return nodeList;
     }
 
     public static XmlNode GetZeroOrOneNode(string nodeName, XmlNode parent){
         var nodeList = parent.SelectNodes(nodeName);
         if (nodeList == null) throw new Exception($"Error selecting node <{nodeName}> from <{parent}>");
-        if (nodeList.Count > 1) throw new XmlNodeNotUnique(nodeList[0]);
+        if (nodeList.Count > 1) throw new XmlNodeNotUniqueException(nodeList[0]);
         // ReSharper disable once ConvertIfStatementToReturnStatement
         if (nodeList.Count == 0) return null;
         return nodeList[0];
@@ -28,8 +29,8 @@ public static class XmlHelper{
     public static XmlNode GetUniqueNode(string nodeName, XmlNode parent){
         var nodeList = parent.SelectNodes(nodeName);
         if (nodeList == null) throw new Exception($"Error selecting node <{nodeName}> from <{parent}>");
-        if (nodeList.Count == 0) throw new XmlNodeNotFound(nodeName, parent);
-        if (nodeList.Count > 1) throw new XmlNodeNotUnique(nodeList[0]);
+        if (nodeList.Count == 0) throw new XmlNodeNotFoundException(nodeName, parent);
+        if (nodeList.Count > 1) throw new XmlNodeNotUniqueException(nodeList[0]);
         return nodeList[0];
     }
 
@@ -160,11 +161,11 @@ public static class XmlHelper{
     }
 
     public static void AssertName(XmlNode node, string name){
-        if (node.Name != name) throw new XmlNodeWrongName(node, name);
+        if (node.Name != name) throw new XmlNodeWrongNameException(name,node);
     }
 
     public static void AssertName(XmlNode node, string[] nameArray){
-        if (!nameArray.Contains(node.Name)) throw new XmlNodeWrongName(node, nameArray.ToString());
+        if (!nameArray.Contains(node.Name)) throw new XmlNodeWrongNameException(nameArray.ToString(),node);
     }
 
     public static XmlDocument AddChildNode(XmlDocument xmlDoc, string xpath, string xmlString){
@@ -172,7 +173,7 @@ public static class XmlHelper{
         fragment.InnerXml = xmlString;
 
         var parentNode = xmlDoc.SelectSingleNode(xpath);
-        if (parentNode == null) throw new XpathFoundNothing(xpath);
+        if (parentNode == null) throw new XpathFoundNothingException(xpath);
         parentNode.AppendChild(fragment);
         return xmlDoc;
     }

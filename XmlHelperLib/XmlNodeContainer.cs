@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using XmlHelperLib.exceptions;
 
 namespace XmlHelperLib{
 public class XmlNodeContainer{
@@ -13,21 +14,21 @@ public class XmlNodeContainer{
 
     protected void AssertSelf(string nodeName, string attrName = null){
         if (SelfNode == null) throw new Exception("Node is null");
-        if (SelfNode.Name != nodeName) throw new XmlNodeWrongName(SelfNode, nodeName);
+        if (SelfNode.Name != nodeName) throw new XmlNodeWrongNameException(nodeName, SelfNode);
         if (attrName != null){
-            var unused = SelfNode.Attributes?[attrName] ?? throw new XmlAttributeNotFound(attrName, SelfNode);
+            var unused = SelfNode.Attributes?[attrName] ?? throw new XmlAttributeNotFoundException(attrName, SelfNode);
         }
     }
 
     protected void AssertOneAndOnlyChildNode(string childNodeName){
         var childNodeList = SelfNode.SelectNodes(childNodeName) ?? throw new Exception("Can not selectNodes");
-        if (childNodeList.Count == 0) throw new XmlNodeNotFound(childNodeName, SelfNode);
-        if (childNodeList.Count > 1) throw new XmlNodeNotUnique(childNodeList[0]);
+        if (childNodeList.Count == 0) throw new XmlNodeNotFoundException(childNodeName, SelfNode);
+        if (childNodeList.Count > 1) throw new XmlNodeNotUniqueException(childNodeList[0]);
     }
 
     protected void AssertOneOrMoreChildNodes(string childNodeName){
         var childNodeList = SelfNode.SelectNodes(childNodeName) ?? throw new Exception("Can not selectNodes");
-        if (childNodeList.Count == 0) throw new XmlNodeNotFound(childNodeName, SelfNode);
+        if (childNodeList.Count == 0) throw new XmlNodeNotFoundException(childNodeName, SelfNode);
     }
 }
 }

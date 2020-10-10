@@ -39,15 +39,21 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="exceptions\XmlAttributeNotFoundException.cs" />
+        <Compile Include="exceptions\XmlHelperException.cs" />
+        <Compile Include="exceptions\XmlNodeNotFoundException.cs" />
+        <Compile Include="exceptions\XmlNodeNotUniqueException.cs" />
+        <Compile Include="exceptions\XmlNodeWrongNameException.cs" />
+        <Compile Include="exceptions\XpathFoundNothingException.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="XmlAttributeNotFound.cs" />
         <Compile Include="XmlHelper.cs" />
         <Compile Include="XmlNodeContainer.cs" />
-        <Compile Include="XmlNodeNotFound.cs" />
-        <Compile Include="XmlNodeNotUnique.cs" />
-        <Compile Include="XmlNodeUnknown.cs" />
-        <Compile Include="XmlNodeWrongName.cs" />
-        <Compile Include="XpathFoundNothing.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\MyException\MyException.csproj">
+        <Project>{e6f37836-1394-4288-913b-a8444e521289}</Project>
+        <Name>MyException</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

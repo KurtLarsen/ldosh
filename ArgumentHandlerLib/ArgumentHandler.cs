@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ArgumentHandlerLib.exceptions;
 
 namespace ArgumentHandlerLib{
 public class ArgumentHandler{

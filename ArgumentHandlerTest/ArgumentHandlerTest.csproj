@@ -55,6 +55,10 @@
         <Project>{defc9c62-6257-4f8d-a5eb-7a6188962c38}</Project>
         <Name>ArgumentHandlerLib</Name>
       </ProjectReference>
+      <ProjectReference Include="..\MyException\MyException.csproj">
+        <Project>{e6f37836-1394-4288-913b-a8444e521289}</Project>
+        <Name>MyException</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

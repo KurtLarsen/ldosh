@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyXML", "MyXML\MyXML.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyXMLtest", "MyXMLtest\MyXMLtest.csproj", "{23813B54-0FF3-4411-8BB8-6456BC65AEF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyException", "MyException\MyException.csproj", "{E6F37836-1394-4288-913B-A8444E521289}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,5 +65,9 @@ Global
 		{23813B54-0FF3-4411-8BB8-6456BC65AEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23813B54-0FF3-4411-8BB8-6456BC65AEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23813B54-0FF3-4411-8BB8-6456BC65AEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F37836-1394-4288-913B-A8444E521289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F37836-1394-4288-913B-A8444E521289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F37836-1394-4288-913B-A8444E521289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F37836-1394-4288-913B-A8444E521289}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

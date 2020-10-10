@@ -1,4 +1,5 @@
 ﻿using ArgumentHandlerLib;
+using ArgumentHandlerLib.exceptions;
 using NUnit.Framework;
 
 namespace ArgumentHandlerTest{
@@ -8,7 +9,7 @@ public class MissingValuesExceptionTest{
     public void MissingValuesException_works(){
         Argument arg1 = new Argument("abc").RequiredValueCount(1);
         var expectedMsg = string.Format(MissingValuesException.MsgMask, arg1.RawId,arg1.RequiredValueCountAsString(),arg1.GivenValuesAsString());
-        var expectedCode = MissingValuesException.Code;
+        var expectedCode = MissingValuesException.ErrCode;
 
         var exception = Assert.Throws<MissingValuesException>(delegate{
             throw new MissingValuesException(arg1);
@@ -16,7 +17,7 @@ public class MissingValuesExceptionTest{
 
         Assert.IsInstanceOf<ArgumentException>(exception);
         Assert.That(exception.Message, Is.EqualTo(expectedMsg));
-        Assert.That(exception.ErrCode() == expectedCode);
+        Assert.That(exception.Code == expectedCode);
     }
 }
 }

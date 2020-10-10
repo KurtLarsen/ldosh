@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 using NUnit.Framework;
 using XmlHelperLib;
+using XmlHelperLib.exceptions;
 
 namespace XmlHelperTest{
 [TestFixture]
@@ -107,41 +108,45 @@ public class XmlHelperTest{
     public void AddChild_works(){
         var xmlDocument = new XmlDocument();
 
-        // *** test ***
+        // setup
         xmlDocument.LoadXml("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!-- comment --><a><b>b-text</b></a>");
 
+        // test
         XmlHelper.AddChildNode(xmlDocument, "a", "<c>content of c</c>");
 
         Assert.That(xmlDocument.OuterXml,
             Is.EqualTo(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!-- comment --><a><b>b-text</b><c>content of c</c></a>"));
 
-        // *** test ***
+        // setup
         xmlDocument.LoadXml("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!-- comment --><a><b>b-text</b></a>");
 
+        // test
         XmlHelper.AddChildNode(xmlDocument, "/a", "<c>content of c</c>");
 
         Assert.That(xmlDocument.OuterXml,
             Is.EqualTo(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!-- comment --><a><b>b-text</b><c>content of c</c></a>"));
 
-        // *** test ***
+        // setup
         xmlDocument.LoadXml("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!-- comment --><a><b>b-text</b></a>");
 
+        // test
         XmlHelper.AddChildNode(xmlDocument, "a/b", "<c>content of c</c>");
 
         Assert.That(xmlDocument.OuterXml,
             Is.EqualTo(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!-- comment --><a><b>b-text<c>content of c</c></b></a>"));
 
-        // *** test ***
+        // setup
         xmlDocument.LoadXml("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!-- comment --><a><b>b-text</b></a>");
 
-        var exception = Assert.Throws<XpathFoundNothing>(delegate{
+        // test
+        var exception = Assert.Throws<XpathFoundNothingException>(delegate{
             var unused = XmlHelper.AddChildNode(xmlDocument, "b", "<c>content of c</c>");
         });
 
-        Assert.That(exception.Message, Is.EqualTo("b"));
+        Assert.That(exception.Message, Is.EqualTo(string.Format(XpathFoundNothingException.MsgMask,"b")));
     }
 }
 }

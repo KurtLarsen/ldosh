@@ -4,11 +4,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{DEFC9C62-6257-4F8D-A5EB-7A6188962C38}</ProjectGuid>
+        <ProjectGuid>{E6F37836-1394-4288-913B-A8444E521289}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ArgumentHandlerLib</RootNamespace>
-        <AssemblyName>ArgumentHandlerLib</AssemblyName>
+        <RootNamespace>MyException</RootNamespace>
+        <AssemblyName>MyException</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -38,21 +38,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Argument.cs" />
-        <Compile Include="ArgumentHandler.cs" />
-        <Compile Include="exceptions\ArgumentException.cs" />
-        <Compile Include="exceptions\ArgumentGivenMoreThanOnceException.cs" />
-        <Compile Include="exceptions\ArgumentIdExpectedException.cs" />
-        <Compile Include="exceptions\MissingRequiredArgumentException.cs" />
-        <Compile Include="exceptions\MissingValuesException.cs" />
-        <Compile Include="exceptions\UnknownArgumentIdException.cs" />
+        <Compile Include="MyException.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\MyException\MyException.csproj">
-        <Project>{e6f37836-1394-4288-913b-a8444e521289}</Project>
-        <Name>MyException</Name>
-      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

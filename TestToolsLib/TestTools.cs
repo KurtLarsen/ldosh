@@ -41,8 +41,15 @@ public sealed class TestTools : IDisposable{
     private void Dispose(bool disposing){
         if (!_disposed){
             if (disposing){
-                foreach (var file in _tmpFileList)
-                    File.Delete(file);
+                foreach (var file in _tmpFileList){
+
+                    try{
+                        File.Delete(file);
+                    }
+                    catch (Exception e){
+                        // ignored
+                    }
+                }
             }
             // Dispose unmanaged resources here.
         }
