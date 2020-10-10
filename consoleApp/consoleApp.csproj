@@ -38,6 +38,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Deployer.cs" />
+        <Compile Include="DeployerException.cs" />
+        <Compile Include="NoProfileSelected.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="RequestedProfileNodeNotFoundException.cs" />
@@ -47,6 +49,10 @@
       <ProjectReference Include="..\ArgumentHandlerLib\ArgumentHandlerLib.csproj">
         <Project>{defc9c62-6257-4f8d-a5eb-7a6188962c38}</Project>
         <Name>ArgumentHandlerLib</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\MyException\MyException.csproj">
+        <Project>{e6f37836-1394-4288-913b-a8444e521289}</Project>
+        <Name>MyException</Name>
       </ProjectReference>
       <ProjectReference Include="..\XmlHelperLib\XmlHelperLib.csproj">
         <Project>{b9099cf2-fada-4a46-838b-26c0e2f2edba}</Project>

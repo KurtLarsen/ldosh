@@ -6,9 +6,7 @@ public class XmlNodeWrongNameException :XmlHelperException{
     public const int ErrCode = 3;
 
     public XmlNodeWrongNameException(string expectedName,XmlNode node) :
-        base(MsgMask, expectedName, node.Name){
-        _code = ErrCode;
-    }
+        base(ErrCode,MsgMask, expectedName, node.Name){ }
 
 }
 }

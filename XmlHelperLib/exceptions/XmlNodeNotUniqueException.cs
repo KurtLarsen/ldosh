@@ -6,8 +6,6 @@ public class XmlNodeNotUniqueException : XmlHelperException{
     public const int ErrCode = 3;
 
     public XmlNodeNotUniqueException(XmlNode subNode) :
-        base(MsgMask,subNode.Name,subNode.ParentNode.Name){
-        _code = ErrCode;
-    }
+        base(ErrCode,MsgMask,subNode.Name,subNode.ParentNode.Name){ }
 }
 }

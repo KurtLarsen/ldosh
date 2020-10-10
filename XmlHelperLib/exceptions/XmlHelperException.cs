@@ -3,7 +3,7 @@
 namespace XmlHelperLib.exceptions{
 public abstract class XmlHelperException:MyException.MyException{
     // constructor
-    public XmlHelperException(string msgMask, params Object[] args) : base(msgMask, args){ }
+    public XmlHelperException(int code,string msgMask, params Object[] args) : base(code,msgMask, args){ }
 
 }
 }

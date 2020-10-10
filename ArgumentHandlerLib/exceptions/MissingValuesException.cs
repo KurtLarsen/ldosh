@@ -8,10 +8,8 @@ public class MissingValuesException : ArgumentException{
     public const string MsgMask = "Value(s) missing for argument {0}. Expected {1}. Found: {2}";
     public const int ErrCode = 4;
 
-    public MissingValuesException(Argument argument) : base(MsgMask, argument.RawId,
-        argument.RequiredValueCountAsString(), argument.GivenValuesAsString()){
-        _code = ErrCode;
-    }
+    public MissingValuesException(Argument argument) : base(ErrCode,MsgMask, argument.RawId,
+        argument.RequiredValueCountAsString(), argument.GivenValuesAsString()){ }
 
     
 }

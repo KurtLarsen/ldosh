@@ -7,9 +7,7 @@ public class ArgumentIdExpected:ArgumentException{
     public const string MsgMask = "Argument id expected. Found \"{0}\"";
     public const int ErrCode = 2;
 
-    public ArgumentIdExpected(string unexpectedElement) : base(MsgMask, unexpectedElement){
-        _code = ErrCode;
-    }
+    public ArgumentIdExpected(string unexpectedElement) : base(ErrCode,MsgMask, unexpectedElement){ }
     
 }
 }

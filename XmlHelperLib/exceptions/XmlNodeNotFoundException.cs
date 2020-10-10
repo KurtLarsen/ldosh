@@ -7,9 +7,7 @@ public class XmlNodeNotFoundException : XmlHelperException{
     public const int ErrCode = 2;
 
     public XmlNodeNotFoundException(string missingNodeName, XmlNode node)
-        : base(MsgMask, missingNodeName, node.Name){
-        _code = ErrCode;
-    }
+        : base(ErrCode,MsgMask, missingNodeName, node.Name){ }
 
 }
 }

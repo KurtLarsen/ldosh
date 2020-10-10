@@ -23,9 +23,15 @@ public class DeployerTest{
 
     [Test, TestCaseSource(nameof(ConstructDeployerTestData))]
     public void Deployer_can_be_constructed(string xml, string[] args){
+        // ----------- setup ------------
         var projectName = "testProject";
         var projectRoot = _testTools.GetTestFolder() + @"testData\" + projectName;
-        var tmpXml = _testTools.GetNewTmpFilePath(".xml", projectRoot + @"\deployment\");
+
+        // create xml file
+        var tmpXml = _testTools.GetNewTmpFilePath(".xml", projectRoot + @"\deployment\tmp");
+        var xmlDoc = new XmlDocument();
+        xmlDoc.LoadXml(xml);
+        xmlDoc.Save(tmpXml);
 
         // add -px profile.xml to arguments
         var allArgs = new string[args.Length + 2];
@@ -34,19 +40,15 @@ public class DeployerTest{
         var index = 2;
         foreach (string s in args){
             allArgs[index] = s;
-        }
-
-
-        // create xml file
-        var xmlDoc = new XmlDocument();
-        xmlDoc.LoadXml(xml);
-        xmlDoc.Save(tmpXml);
-
+        } 
+        
         var argumentHandler = new ArgumentHandlerLib.ArgumentHandler();
         argumentHandler.DefineArgument(new Argument("px").RequiredValueCount(1));
 
         Assert.True( argumentHandler.AnalyzeGivenInput(allArgs));
 
+        
+        // ----------- test ------------
         var deployer = new Deployer(argumentHandler);
         Assert.NotNull(deployer);
 
@@ -57,7 +59,7 @@ public class DeployerTest{
     private static IEnumerable<TestCaseData> ConstructDeployerTestData{
         get{
             yield return
-                new TestCaseData("<deployer><profile name=\"abc\"></profile></deployer>", new string[]{ }).SetName("no arg given");
+                new TestCaseData("<deployer><profile name='abc'></profile></deployer>", new string[]{ }).SetName("-px profile.xml");
         }
     }
 }

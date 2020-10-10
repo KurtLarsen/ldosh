@@ -58,7 +58,6 @@ public class Deployer{
         _requestedProfileName = argumentHandler.GetArgument(ProfileName)?.Values[0] ??
                            XmlHelper.GetOptionalAttr(XmlNames.DefaultProfile, deployerNode);
         if (_requestedProfileName == null){
-        
             if (profileList.Count == 1){
                 _requestedProfileName = XmlHelper.GetAttr(XmlNames.ProfileName, profileList[0]);
             }

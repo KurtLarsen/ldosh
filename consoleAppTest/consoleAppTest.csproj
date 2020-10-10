@@ -77,6 +77,7 @@
       <Folder Include="TestData\testProject\bootstrap" />
       <Folder Include="TestData\testProject\config" />
       <Folder Include="TestData\testProject\database" />
+      <Folder Include="TestData\testProject\deployment\tmp" />
       <Folder Include="TestData\testProject\node_modules" />
       <Folder Include="TestData\testProject\public\storage" />
       <Folder Include="TestData\testProject\resources" />
