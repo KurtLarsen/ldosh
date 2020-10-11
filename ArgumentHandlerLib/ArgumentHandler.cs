@@ -22,7 +22,7 @@ public class ArgumentHandler{
             var index = 0;
             while (index < strings.Length){
                 if (!strings[index].StartsWith(@"-")){
-                    throw new ArgumentIdExpected(strings[index]);
+                    throw new ArgumentIdExpectedException(strings[index]);
                 }
 
                 Argument argument;
@@ -62,7 +62,7 @@ public class ArgumentHandler{
             }
         }
         catch (Exception e){
-            if (e is ArgumentGivenMoreThanOnceException || e is ArgumentIdExpected ||
+            if (e is ArgumentGivenMoreThanOnceException || e is ArgumentIdExpectedException ||
                 e is MissingRequiredArgumentException || e is MissingValuesException ||
                 e is UnknownArgumentIdException){
                 _exceptionThrown = e;

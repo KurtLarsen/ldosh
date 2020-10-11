@@ -8,11 +8,11 @@ public class ArgumentIdExpectedTest{
     [Test]
     public void ArgumentIdExpected_works(){
         string arg1 = "abc";
-        var expectedMsg = string.Format(ArgumentIdExpected.MsgMask, arg1);
-        var expectedCode = ArgumentIdExpected.ErrCode;
+        var expectedMsg = string.Format(ArgumentIdExpectedException.MsgMask, arg1);
+        var expectedCode = ArgumentIdExpectedException.ErrCode;
 
-        var exception = Assert.Throws<ArgumentIdExpected>(delegate{
-            throw new ArgumentIdExpected(arg1);
+        var exception = Assert.Throws<ArgumentIdExpectedException>(delegate{
+            throw new ArgumentIdExpectedException(arg1);
         });
 
         Assert.IsInstanceOf<ArgumentException>(exception);

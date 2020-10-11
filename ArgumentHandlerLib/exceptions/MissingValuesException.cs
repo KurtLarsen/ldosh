@@ -1,8 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using ArgumentException = ArgumentHandlerLib.exceptions.ArgumentException;
-
-namespace ArgumentHandlerLib{
+﻿namespace ArgumentHandlerLib.exceptions{
 public class MissingValuesException : ArgumentException{
     // ReSharper disable once MemberCanBePrivate.Global
     public const string MsgMask = "Value(s) missing for argument {0}. Expected {1}. Found: {2}";
