@@ -6,7 +6,6 @@ public class XmlAttributeNotFoundException : XmlHelperException{
     public const int ErrCode = 1;
 
     public XmlAttributeNotFoundException(string missingAttributeName, XmlNode node)
-        : base(ErrCode,MsgMask, missingAttributeName, node.Name){ }
-
+        : base(ErrCode, MsgMask, missingAttributeName, node.Name){ }
 }
 }

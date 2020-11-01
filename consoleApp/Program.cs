@@ -3,7 +3,9 @@ using ArgumentHandlerLib;
 
 namespace consoleApp{
 public static class Program{
+    // ReSharper disable once UnusedMember.Global
     public const string ArgumentProfileName = "p";
+
     private static readonly string HelpMsg = $"-px <path to profile.xml>{Environment.NewLine}" +
                                              $"-p  <profile name>{Environment.NewLine}" +
                                              $"-sx <path to servers.xml{Environment.NewLine}" +
@@ -12,13 +14,10 @@ public static class Program{
                                              $"-r  <path to project root>{Environment.NewLine}";
 
     public static void Main(string[] args){
-
-        var argumentHandler = new ArgumentHandler();
-        argumentHandler.DefineArgument(new Argument("?").Optional().IgnoreOthers());
-        argumentHandler.DefineArgument(new Argument("h").Optional().LongId("help").IgnoreOthers());
-        argumentHandler.DefineArgument(new Argument("px").RequiredValueCount(1));
+        var argumentHandler = GetArgumentHandler();
+        
         try{
-            argumentHandler.AnalyzeGivenInput(args);
+            argumentHandler.SetInputParam(args);
         }
         catch (Exception ex){
             Console.Error.WriteLine(ex.Message);
@@ -29,10 +28,18 @@ public static class Program{
             Console.Out.WriteLine(HelpMsg);
             Environment.Exit(1);
         }
-        
-        var x=new Deployer(argumentHandler);
-        
-        
+
+        // ReSharper disable once UnusedVariable
+        var x = new Deployer(argumentHandler);
+    }
+
+    public static ArgumentHandler GetArgumentHandler(){
+        return new ArgumentHandler(
+            new Argument("?").Optional().IgnoreOthers(),
+            new Argument("h").Optional().LongId("help").IgnoreOthers(),
+            new Argument("px").RequiredValueCount(1),
+            new Argument("pr").Optional().LongId("projectroot").RequiredValueCount(1)
+        );
     }
 }
 }

@@ -32,7 +32,15 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+      <OutputPath>bin\Test\</OutputPath>
+      <DefineConstants>DEBUG;TRACE;TEST</DefineConstants>
+    </PropertyGroup>
     <ItemGroup>
+        <Reference Include="JetBrains.Annotations, Version=2020.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+          <HintPath>..\packages\JetBrains.Annotations.2020.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
@@ -42,23 +50,31 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="ArgumentGivenMoreThanOnceExceptionTest.cs" />
         <Compile Include="ArgumentHandlerTest.cs" />
-        <Compile Include="ArgumentIdExpectedTest.cs" />
-        <Compile Include="MissingRequiredArgumentExceptionTest.cs" />
-        <Compile Include="MissingValuesExceptionTest.cs" />
+        <Compile Include="exceptionTests\ArgumentGivenMoreThanOnceExceptionTest.cs" />
+        <Compile Include="exceptionTests\ArgumentIdExpectedTest.cs" />
+        <Compile Include="exceptionTests\MissingRequiredArgumentExceptionTest.cs" />
+        <Compile Include="exceptionTests\MissingValuesExceptionTest.cs" />
+        <Compile Include="exceptionTests\UnknownArgumentIdExceptionTest.cs" />
+        <Compile Include="FailedRuntimeExamination.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="UnknownArgumentIdExceptionTest.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\ArgumentHandlerLib\ArgumentHandlerLib.csproj">
         <Project>{defc9c62-6257-4f8d-a5eb-7a6188962c38}</Project>
         <Name>ArgumentHandlerLib</Name>
       </ProjectReference>
+      <ProjectReference Include="..\consoleApp\consoleApp.csproj">
+        <Project>{223ee7ca-76f6-4655-8347-f44cfdcfe9c2}</Project>
+        <Name>consoleApp</Name>
+      </ProjectReference>
       <ProjectReference Include="..\MyException\MyException.csproj">
         <Project>{e6f37836-1394-4288-913b-a8444e521289}</Project>
         <Name>MyException</Name>
       </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

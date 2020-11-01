@@ -17,6 +17,7 @@ public static class XmlHelper{
         return nodeList;
     }
 
+    // ReSharper disable once UnusedMember.Global
     public static XmlNode GetZeroOrOneNode(string nodeName, XmlNode parent){
         var nodeList = parent.SelectNodes(nodeName);
         if (nodeList == null) throw new Exception($"Error selecting node <{nodeName}> from <{parent}>");
@@ -35,6 +36,7 @@ public static class XmlHelper{
     }
 
 
+    // ReSharper disable once UnusedMember.Global
     public static XmlNodeList GetZeroOrMoreNodes(string nodeName, XmlNode parent){
         var nodeList = parent.SelectNodes(nodeName);
         if (nodeList == null) throw new Exception($"Error selecting node <{nodeName}> from <{parent}>");
@@ -160,12 +162,14 @@ public static class XmlHelper{
         return destinationFile;
     }
 
+    // ReSharper disable once UnusedMember.Global
     public static void AssertName(XmlNode node, string name){
-        if (node.Name != name) throw new XmlNodeWrongNameException(name,node);
+        if (node.Name != name) throw new XmlNodeWrongNameException(name, node);
     }
 
+    // ReSharper disable once UnusedMember.Global
     public static void AssertName(XmlNode node, string[] nameArray){
-        if (!nameArray.Contains(node.Name)) throw new XmlNodeWrongNameException(nameArray.ToString(),node);
+        if (!nameArray.Contains(node.Name)) throw new XmlNodeWrongNameException(nameArray.ToString(), node);
     }
 
     public static XmlDocument AddChildNode(XmlDocument xmlDoc, string xpath, string xmlString){
@@ -207,6 +211,7 @@ public static class XmlHelper{
         return GetOneOrMoreNodes(childNodeName, xmlDocument);
     }
 
+    // ReSharper disable once UnusedMember.Global
     public static XmlNode GetUniqueNode(string childNodeName, string xmlFileName){
         var xmlDocument = new XmlDocument();
         xmlDocument.Load(xmlFileName);
@@ -214,9 +219,8 @@ public static class XmlHelper{
     }
 
     public static string GetOptionalAttr(string attrName, XmlNode node){
-        var s = node.Attributes?[attrName]?.Value ?? null;
+        var s = node.Attributes?[attrName]?.Value;
         return s;
-        
     }
 }
 }

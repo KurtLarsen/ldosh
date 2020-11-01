@@ -146,7 +146,7 @@ public class XmlHelperTest{
             var unused = XmlHelper.AddChildNode(xmlDocument, "b", "<c>content of c</c>");
         });
 
-        Assert.That(exception.Message, Is.EqualTo(string.Format(XpathFoundNothingException.MsgMask,"b")));
+        Assert.That(exception.Message, Is.EqualTo(string.Format(XpathFoundNothingException.MsgMask, "b")));
     }
 }
 }

@@ -1,10 +1,8 @@
 ﻿namespace ArgumentHandlerLib.exceptions{
-public class ArgumentIdExpectedException:ArgumentException{
-    // ReSharper disable once MemberCanBePrivate.Global
+public class ArgumentIdExpectedException : ArgumentException{
     public const string MsgMask = "Argument id expected. Found \"{0}\"";
-    public const int ErrCode = 2;
+    public new const int Code = 2;
 
-    public ArgumentIdExpectedException(string unexpectedElement) : base(ErrCode,MsgMask, unexpectedElement){ }
-    
+    public ArgumentIdExpectedException(string unexpectedElement) : base(Code, MsgMask, unexpectedElement){ }
 }
 }

@@ -2,15 +2,13 @@
 using ArgumentHandlerLib.exceptions;
 using NUnit.Framework;
 
-namespace ArgumentHandlerTest{
+namespace ArgumentHandlerTest.exceptionTests{
 [TestFixture]
 public class ArgumentGivenMoreThanOnceExceptionTest{
     [Test]
     public void ArgumentGivenMoreThanOnceException_works(){
-        Argument arg1 = new Argument("abc");
-        arg1.RawId = "def";
+        var arg1 = new Argument("abc"){RawId = "def"};
         var expectedMsg = string.Format(ArgumentGivenMoreThanOnceException.MsgMask, arg1.RawId);
-        var expectedCode = ArgumentGivenMoreThanOnceException.ErrCode;
 
         var exception = Assert.Throws<ArgumentGivenMoreThanOnceException>(delegate{
             throw new ArgumentGivenMoreThanOnceException(arg1);
@@ -18,7 +16,8 @@ public class ArgumentGivenMoreThanOnceExceptionTest{
 
         Assert.IsInstanceOf<ArgumentException>(exception);
         Assert.That(exception.Message, Is.EqualTo(expectedMsg));
-        Assert.That(exception.Code == expectedCode);
+        Assert.That(exception.Code() == ArgumentGivenMoreThanOnceException.Code);
+        
     }
 }
 }

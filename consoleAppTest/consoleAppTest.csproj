@@ -32,7 +32,15 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+      <OutputPath>bin\Test\</OutputPath>
+      <DefineConstants>DEBUG;TRACE;TEST</DefineConstants>
+    </PropertyGroup>
     <ItemGroup>
+        <Reference Include="JetBrains.Annotations, Version=2020.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+          <HintPath>..\packages\JetBrains.Annotations.2020.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
@@ -53,6 +61,10 @@
       <ProjectReference Include="..\consoleApp\consoleApp.csproj">
         <Project>{223ee7ca-76f6-4655-8347-f44cfdcfe9c2}</Project>
         <Name>consoleApp</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\MyException\MyException.csproj">
+        <Project>{e6f37836-1394-4288-913b-a8444e521289}</Project>
+        <Name>MyException</Name>
       </ProjectReference>
       <ProjectReference Include="..\TestToolsLib\TestToolsLib.csproj">
         <Project>{14c1d874-fe74-4f19-9ce4-bdcacec800d1}</Project>
@@ -84,6 +96,9 @@
       <Folder Include="TestData\testProject\routes" />
       <Folder Include="TestData\testProject\storage" />
       <Folder Include="TestData\testProject\vendor" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,13 +3,13 @@
 namespace ArgumentHandlerLib{
 public class Argument{
     private readonly string _shortId;
-    private bool _required = true;
-    private string _longId;
     private readonly List<string> _values = new List<string>();
-    private string _rawId;
     private bool _ignoreOthers; // default is false
-    private int _valueCountMin;
+    private string _longId;
+    private string _rawId;
+    private bool _required = true;
     private int _valueCountMax;
+    private int _valueCountMin;
 
     public Argument(string shortId){
         _shortId = shortId;
@@ -71,11 +71,12 @@ public class Argument{
     }
 
     public string RequiredValueCountAsString(){
-        if (_valueCountMin == _valueCountMax){
+        if (_valueCountMin == _valueCountMax)
             return _valueCountMin == 1 ? $"{_valueCountMin} value" : $"{_valueCountMin} values";
-        }
 
-        return _valueCountMax - _valueCountMin == 1 ? $"{_valueCountMin} or {_valueCountMax} values" : $"{_valueCountMin} to {_valueCountMax} values";
+        return _valueCountMax - _valueCountMin == 1
+            ? $"{_valueCountMin} or {_valueCountMax} values"
+            : $"{_valueCountMin} to {_valueCountMax} values";
     }
 
     public string GivenValuesAsString(){
